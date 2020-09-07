@@ -1,3 +1,11 @@
+from bs4 import BeautifulSoup as bs
+import requests
+from pprint import pprint
+
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'}
+
+
 class HeadHunter:
     def __init__(self):
         self.name = "HeadHunter"
@@ -17,9 +25,9 @@ class HeadHunter:
             return False
         return True
 
-    def getVacancies(self, keywords, limit=50):
+    def getVacancies(self, keywords, limit=30):
         self.parse(keywords, limit)
-        pprint(self.dictionary)
+        return self.dictionary
 
     def parse(self, keywords, limit):
         pageNumber = 1
@@ -50,6 +58,8 @@ class HeadHunter:
                     employer = employer.getText()
                 if salary is not None:
                     salary = salary.getText()
+                if datePublished is not None:
+                    datePublished = datePublished.getText()
 
                 self.dictionary.append({
                     'name': name.getText(),
@@ -57,7 +67,7 @@ class HeadHunter:
                     'joblink': link,
                     'employer': employer,
                     'location': location,
-                    'datePublished': datePublished.getText()
+                    'datePublished': datePublished
                 })
 
                 limit -= 1

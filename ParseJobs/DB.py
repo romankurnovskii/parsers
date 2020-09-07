@@ -15,3 +15,13 @@ def insertSuperjob(object):
 def insertHeadhunter(object):
     for vacancy in object:
         headhunter.insert_one(vacancy)
+
+
+def salary_query(collection, max):
+    client = MongoClient('localhost', 27017)
+    db = client['jobs']
+    collection = db.get_collection(collection)
+    for job in collection.find(
+            {'$or': [{'min_salary': {'$lt': max}}, {'max_salary': {'$gt': max}}]}
+    ):
+        print(job)
