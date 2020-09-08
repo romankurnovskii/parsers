@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup as bs
 import requests
 from pprint import pprint
 
+from ParseJobs.Components import convertSalary
+
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'}
 
@@ -56,10 +58,10 @@ class HeadHunter:
                 location = location.getText()
                 if employer is not None:
                     employer = employer.getText()
-                if salary is not None:
-                    salary = salary.getText()
                 if datePublished is not None:
                     datePublished = datePublished.getText()
+
+                salary = convertSalary(salary)
 
                 self.dictionary.append({
                     'name': name.getText(),
