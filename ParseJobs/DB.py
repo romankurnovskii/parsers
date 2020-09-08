@@ -10,18 +10,33 @@ superjob = db.superjob
 
 def insertSuperjob(object):
     for vacancy in object:
-        superjob.insert_one(vacancy)
+        if not isExists(superjob, vacancy):
+            superjob.insert_one(vacancy)
+
 
 def insertHeadhunter(object):
     for vacancy in object:
-        headhunter.insert_one(vacancy)
+        if not isExists(headhunter, vacancy):
+            headhunter.insert_one(vacancy)
 
-
-def salary_query(collection, max):
-    client = MongoClient('localhost', 27017)
-    db = client['jobs']
-    collection = db.get_collection(collection)
+# find vacancies where salary greater then input
+def salary_query(collection, salary):
+    # client = MongoClient('localhost', 27017)
+    # db = client['jobs']
+    # collection = db.get_collection(collection)
+    result = []
     for job in collection.find(
-            {'$or': [{'min_salary': {'$lt': max}}, {'max_salary': {'$gt': max}}]}
+            {'$or': [{'min_salary': {'$lt': salary}}, {'max_salary': {'$gt': salary}}]}
     ):
-        print(job)
+        result.append(job)
+
+    return result
+
+
+#check if vacancy excists in database
+def isExists(collection, object):
+    #check by link
+    count = collection.find({'joblink': object['joblink']}).count()
+    if count > 0:
+        return True
+    return False

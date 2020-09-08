@@ -12,8 +12,7 @@ superjob = Superjob()
 headhunter = HeadHunter()
 
 #
-# response = input("Введите вакансию")
-response = "повар"
+response = input("Введите вакансию")
 sj_vacs = superjob.getVacancies(response)
 hh_vacs = headhunter.getVacancies(response)
 
@@ -22,5 +21,3 @@ pprint(sj_vacs)
 # insert into db
 DB.insertSuperjob(sj_vacs)
 DB.insertHeadhunter(hh_vacs)
-
-print("done")
