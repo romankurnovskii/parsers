@@ -26,7 +26,7 @@ def salary_query(collection, salary):
     # collection = db.get_collection(collection)
     result = []
     for job in collection.find(
-            {'$or': [{'min_salary': {'$lt': salary}}, {'max_salary': {'$gt': salary}}]}
+            {'$or': [{'min_salary': {'$gt': salary}}, {'max_salary': {'$gt': salary}}]}
     ):
         result.append(job)
 
