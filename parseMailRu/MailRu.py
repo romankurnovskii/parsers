@@ -20,12 +20,6 @@ options = Options()
 # wait until page loads
 options.page_load_strategy = 'eager'
 
-
-# scroll
-# get 1st element
-# actions.send_keys(Keys.ARROW_UP).key_up(Keys.ARROW_UP).perform()
-
-
 class MailRu:
     def __init__(self):
         self.URL = 'http://mail.ru'
