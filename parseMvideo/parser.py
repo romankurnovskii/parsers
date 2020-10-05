@@ -1,5 +1,6 @@
 from pprint import pprint
-from parseMvideo.MvideoHits import MvideoHits
+
+from MvideoHits import MvideoHits
 
 mvideo = MvideoHits()
 mvideo.start()
