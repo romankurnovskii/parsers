@@ -1,9 +1,9 @@
 import locale
 from pprint import pprint
 
-from ParseJobs import DB
-from ParseJobs.HeadHunter import HeadHunter
-from ParseJobs.Superjob import Superjob
+import DB
+from HeadHunter import HeadHunter
+from Superjob import Superjob
 
 locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
 
@@ -12,7 +12,8 @@ superjob = Superjob()
 headhunter = HeadHunter()
 
 #
-response = input("Введите вакансию")
+response = input("Введите вакансию: ")
+print('Loading...')
 sj_vacs = superjob.getVacancies(response)
 hh_vacs = headhunter.getVacancies(response)
 
